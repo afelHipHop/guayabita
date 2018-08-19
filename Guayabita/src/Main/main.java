@@ -10,12 +10,13 @@ package Main;
  * @author Estudiantes
  */
 
-import Logico.dado;
+import Logico.Decision;
+import Logico.Juego;
 
 public class main {
 
     public static void main(String[] args) {
-        System.out.println(new dado().rodarDado());
+        new Juego().jugar(new Decision().decidir(1, 6), 1000, 1000, 100, 200, 1,new Decision().decidir(1, 6),new Juego().ponerDinero(1000, 100, 200));
     }
     
 }
