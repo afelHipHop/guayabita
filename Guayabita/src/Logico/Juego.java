@@ -12,7 +12,7 @@ package Logico;
 public class Juego {
     
     public void jugar(int dado, int dinero1, int dinero2, int apuestaMin, int dineroMesa, int jugador, int nuevoDado, int apuesta){
-        if(dinero1<=0||dinero2 <= 0){
+            if(dinero1<=0||dinero2 <= 0){
             if(dinero1<=0)
                 ganador("Jugador 2");
             else
@@ -34,25 +34,30 @@ public class Juego {
                         jugar(new Decision().decidir(1, 6), dinero1, dinero2, apuestaMin, dineroMesa, ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, dineroMesa));
                     }
                     else{
-                        System.out.println("Apuesta");
+                        System.out.println("Apuesta: "+apuesta);
                         System.out.println("Saca: "+nuevoDado);
                         if(dado>=nuevoDado){
                             System.out.println("Pierde: "+apuesta);
-                            jugar(new Decision().decidir(1, 6), (dinero1-apuesta), dinero2, apuestaMin, (dineroMesa+apuesta), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, dineroMesa+apuesta));
+                            jugar(new Decision().decidir(1, 6), (dinero1-apuesta), dinero2, apuestaMin, (dineroMesa+apuesta), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, (dineroMesa+apuesta)));
                         }
                         else{
                             System.out.println("Gana: "+apuesta);
-                            jugar(new Decision().decidir(1, 6), (dinero1+apuesta), dinero2, apuestaMin, (dineroMesa-apuesta), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, dineroMesa-apuesta));
+                            jugar(new Decision().decidir(1, 6), (dinero1+apuesta), dinero2, apuestaMin, (dineroMesa-apuesta), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, (dineroMesa-apuesta)));
                         }
                     }
                 }else{
                     if(dado == 1){
                         System.out.println("Debe poner: "+apuestaMin+" en la mesa");
-                        jugar(new Decision().decidir(1, 6), (dinero1-apuestaMin), dinero2, apuestaMin, (dineroMesa+apuestaMin), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, dineroMesa+apuestaMin));
+                        jugar(new Decision().decidir(1, 6), (dinero1-apuestaMin), dinero2, apuestaMin, (dineroMesa+apuestaMin), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, (dineroMesa+apuestaMin)));
                     }
                     else{
                         System.out.println("Debe sacar: "+apuestaMin+" en la mesa");
-                        jugar(new Decision().decidir(1, 6), (dinero1+apuestaMin), dinero2, apuestaMin, (dineroMesa-apuestaMin), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, dineroMesa-apuestaMin));
+                        if(dineroMesa<apuestaMin){
+                            System.out.println("Hay menos dinero en la mesa que la apuesta minima, debe sacar todo el dinero");
+                            jugar(new Decision().decidir(1, 6), (dinero1+dineroMesa), dinero2, apuestaMin, (0), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, 0));
+                        }
+                        else
+                            jugar(new Decision().decidir(1, 6), (dinero1+apuestaMin), dinero2, apuestaMin, (dineroMesa-apuestaMin), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero2, apuestaMin, (dineroMesa-apuestaMin)));
                     }
                 }
             }else{
@@ -65,25 +70,29 @@ public class Juego {
                         jugar(new Decision().decidir(1, 6), dinero1, dinero2, apuestaMin, dineroMesa, ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, dineroMesa));
                     }
                     else{
-                        System.out.println("Apuesta");
+                        System.out.println("Apuesta: "+apuesta);
                         System.out.println("Saca: "+nuevoDado);
                         if(dado>=nuevoDado){
                             System.out.println("Pierde: "+apuesta);
-                            jugar(new Decision().decidir(1, 6), dinero1, dinero2-apuesta, apuestaMin, (dineroMesa+apuesta), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, dineroMesa+apuesta));
+                            jugar(new Decision().decidir(1, 6), dinero1, dinero2-apuesta, apuestaMin, (dineroMesa+apuesta), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, (dineroMesa+apuesta)));
                         }
                         else{
                             System.out.println("Gana: "+apuesta);
-                            jugar(new Decision().decidir(1, 6), dinero1, dinero2+apuesta, apuestaMin, (dineroMesa-apuesta), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, dineroMesa-apuesta));
+                            jugar(new Decision().decidir(1, 6), dinero1, dinero2+apuesta, apuestaMin, (dineroMesa-apuesta), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, (dineroMesa-apuesta)));
                         }
                     }
                 }else{
                     if(dado == 1){
                         System.out.println("Debe poner: "+apuestaMin+" en la mesa");
-                        jugar(new Decision().decidir(1, 6), dinero1, dinero2-apuestaMin, apuestaMin, (dineroMesa+apuestaMin), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, dineroMesa+apuestaMin));
+                        jugar(new Decision().decidir(1, 6), dinero1, dinero2-apuestaMin, apuestaMin, (dineroMesa+apuestaMin), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, (dineroMesa+apuestaMin)));
                     }
                     else{
                         System.out.println("Debe sacar: "+apuestaMin+" en la mesa");
-                        jugar(new Decision().decidir(1, 6), dinero1, dinero2+apuestaMin, apuestaMin, (dineroMesa-apuestaMin), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, dineroMesa-apuestaMin));
+                        if(dineroMesa<apuestaMin){
+                            System.out.println("Hay menos dinero en la mesa que la apuesta minima, debe sacar todo el dinero");
+                            jugar(new Decision().decidir(1, 6), dinero1, dinero2+dineroMesa, apuestaMin, (0), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, 0));
+                        }else
+                            jugar(new Decision().decidir(1, 6), dinero1, dinero2+apuestaMin, apuestaMin, (dineroMesa-apuestaMin), ((jugador+1)%2),new Decision().decidir(1, 6),ponerDinero(dinero1, apuestaMin, (dineroMesa-apuestaMin)));
                     }
                 }
             }
@@ -93,8 +102,12 @@ public class Juego {
         return new Decision().decidir(1, 2)==1;
     }
     public int ponerDinero(int dinero, int apuestaMin, int dineroMesa){
-        if(dinero>=dineroMesa)
-            return new Decision().decidir(apuestaMin, dineroMesa);
+        if(dinero>=dineroMesa){
+            if(dineroMesa>apuestaMin)
+                return new Decision().decidir(apuestaMin, dineroMesa);
+            else
+                return new Decision().decidir(1, dineroMesa);
+        }
         else
             return new Decision().decidir(apuestaMin, dinero);
     }
@@ -105,3 +118,4 @@ public class Juego {
     }
     
 }
+
