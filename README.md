@@ -18,7 +18,7 @@ Después de realizar la apuesta, el jugador deberá realizar otro lanzamiento:
 •	Si la mesa se queda sin dinero, los jugadores deberán apostar el valor mínimo establecido
 El juego termina cuando uno de los dos jugadores no tenga dinero
 
-## *_Recursividad_*
+## Recursividad
 La recursividad es una técnica implementada en programación que nos permite que un bloque de instrucciones se ejecute un número de veces determinado, es un método que involucra volver a utilizar la función original
 
 Teniendo clara la definición de recursividad y al no implementar estados gracias a la programación declarativa, se tiene un ciclo repetitivo debido a las condiciones del juego, la recursividad fue necesaria ya que reduce el consumo innecesario de memoria y optimiza el proceso.
