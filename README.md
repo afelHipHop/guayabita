@@ -23,7 +23,7 @@ La recursividad es una técnica implementada en programación que nos permite qu
 
 Teniendo clara la definición de recursividad y al no implementar estados gracias a la programación declarativa, se tiene un ciclo repetitivo debido a las condiciones del juego, la recursividad fue necesaria ya que reduce el consumo innecesario de memoria y optimiza el proceso.
 
-## Programación no declarativa o imperativa
+
 
 
 
